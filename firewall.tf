@@ -1,0 +1,93 @@
+resource "azurerm_firewall" "az-firewall" {
+  name                = "slz-firewall"
+  location            = azurerm_resource_group.Secure-Landing-Zone-IaC.location
+  resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  sku_name            = "AZFW_VNet"
+  sku_tier            = "Standard"
+  firewall_policy_id  = azurerm_firewall_policy.fw-policy.id
+
+  ip_configuration {
+    name                 = "ipconfig"
+    subnet_id            = azurerm_subnet.fw-subnet.id
+    public_ip_address_id = azurerm_public_ip.fw-public-ip.id
+  }
+  tags = local.tags
+}
+
+resource "azurerm_subnet" "fw-subnet" {
+  name                 = "AzureFirewallSubnet"
+  resource_group_name  = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  virtual_network_name = azurerm_virtual_network.vnet-lz-hub.name
+  address_prefixes     = [var.FW-IP-CIDR]
+}
+
+resource "azurerm_public_ip" "fw-public-ip" {
+  name                = "fw-public-ip"
+  location            = azurerm_resource_group.Secure-Landing-Zone-IaC.location
+  resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  allocation_method   = "Static"
+  sku                 = "Standard"
+
+  tags = local.tags
+}
+
+resource "azurerm_firewall_policy" "fw-policy" {
+  name                = "fw-policy"
+  resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  location            = azurerm_resource_group.Secure-Landing-Zone-IaC.location
+  sku                 = "Standard"
+
+  tags = local.tags
+}
+
+resource "azurerm_firewall_policy_rule_collection_group" "fw-rcg" {
+  name               = "rcg-lz"
+  firewall_policy_id = azurerm_firewall_policy.fw-policy.id
+  priority           = 100
+
+  network_rule_collection {
+    name     = "allow-app-to-data"
+    priority = 100
+    action   = "Allow"
+
+    rule {
+      name                  = "allow-spoke1-to-spoke2-443"
+      protocols             = ["TCP"]
+      source_addresses      = [var.SPOKE1-IP-CIDR]
+      destination_addresses = [var.SPOKE2-IP-CIDR]
+      destination_ports     = ["443"]
+    }
+  }
+  application_rule_collection {
+    name     = "allow-app-egress"
+    priority = 200
+    action   = "Allow"
+
+    rule {
+      name             = "allow-web-egress"
+      source_addresses = [var.SPOKE1-IP-CIDR]
+      destination_fqdns = [
+        "azure.archive.ubuntu.com",
+        "archive.ubuntu.com",
+        "security.ubuntu.com",
+        "aka.ms",
+        "packages.microsoft.com",
+        "azcliprod.blob.core.windows.net",
+        "management.azure.com",
+        "motd.ubuntu.com",
+        "changelogs.ubuntu.com",
+        "esm.ubuntu.com"
+      ]
+
+      protocols {
+        type = "Http"
+        port = 80
+      }
+      protocols {
+        type = "Https"
+        port = 443
+      }
+    }
+  }
+
+}
