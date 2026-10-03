@@ -13,8 +13,7 @@ variable "username" {
 variable "public_key" {
   description = "Public Key for VM user"
   type        = string
-  default     = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtbLSKyEb/groe1qYSGWLiAxrqLQVgfyud99BYjb3m6EqESalPpUp5HrOv19Oykvso4M+bkThZ/uvaoQ/9/5Uzy5Z2mkmjIBdh4ajklZHBw7pqMTqQqAy0r8oSgpcDkKIaHx3SbXrsWpP0oE7WW8Ar0kh1sZh/foYeMLvkeZ73pUgZhcm2XZvHkjPXUCU6otP3S4BtcaysfuF4eagS+4Ut15e+kefYYd+1ulhO8ssu+IMkqcPWi7g8jFi0w+e6b2oTqJTutmwzerOeJRoBaJtInesAp8eGf3yduR/fmiaiv7QAuLy4Cs+YICqyf+1DH3PR5jUySaeFHM+F3MZKbBwIQIDAQAB
-"
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1/hOe8sQYN+bNtI2Aei/nI19xL3BgDgA9Jw/9WwsXSTLvgQWVlgaZIgEREFieCo6Wjb0z8TvS0D9iNeJt2TobOdPUl0e/GUykNIlTIzwjLSq7QKZBMxBJgghh0f3RdNUGHkkXGpxjJB/ewat7ud/PBWWSkhq9emx3OEGy0Ny18SXxknNDDokKPR4lWiOmBrCpGfrSWFXlmSEJKLVK1Dtrj2kCqyXsMCbaCgZFvm5JXUAnX+oA1vjBRbzrX5eiZibogGYVidkFprOjQJRx84GWQvOjUvEAuh3iZOmnNMFiineJS7WoiUZnpY+wz4sgR3cRFlHHD1YAgYt0hnDvPSDaYfIRYBxmV9mKmYXXAyLuCyJoZESU8G4rMlFLayuiF2v9A2lq7LO9vzikpFGUKlQz9ZlU9xruMe/fZ/ZdDgrK6m2o1YixjWMDj5d72zT/cH94u/3sOrC4xf3BetjiEnUh5EEKmsxf/Y+35NZp3JXcGgcdAUECzwyVgyMOwP/eEHtbzICxfoJRlP/GkxI5hd26OTBFb9dzq8kwaGRA6pdw3Ejk9B6jKRC+2259TWcRDZ4Dsy/fkoCeqiXGd0T9fbvFoESqZMSnpiRrRqjAlAlt2dGEgLAQKIZBzHwSxvWqOIt20ktaEJXQjEJFEk+nl02FyDMics34U7BqljQkL1oXGw=="
 }
 
 variable "SPOKE1-IP-CIDR" {
@@ -41,18 +40,6 @@ variable "FW-IP-CIDR" {
   default     = "192.168.2.0/26"
 }
 
-variable "FW-MGMT-IP-CIDR" {
-  description = "The private IP address to be used for the Firewall."
-  type        = string
-  default     = "192.168.3.0/26"
-}
-
-variable "user_id" {
-  description = "User ID for RBAC"
-  type        = string
-  default     = "ce295710-d58c-484a-b0bb-648764d048c2"
-}
-
 locals {
   subnet1_cidr        = cidrsubnet(var.HUB-IP-CIDR, 8, 1)
   subnet2_cidr        = cidrsubnet(var.SPOKE1-IP-CIDR, 8, 1)
@@ -66,9 +53,4 @@ locals {
     env     = "dev"
     owner   = "fream"
   }
-}
-
-variable "source_ip" {
-  description = "Public IP allowed through the Key Vault firewall during apply"
-  type        = string
 }

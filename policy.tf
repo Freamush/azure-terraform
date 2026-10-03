@@ -48,6 +48,6 @@ resource "azurerm_policy_definition" "no_public_ip" {
 resource "azurerm_resource_group_policy_assignment" "no_public_ip_assignment" {
   name                 = "no_public_ip_assignment"
   resource_group_id    = azurerm_resource_group.Secure-Landing-Zone-IaC.id
-  policy_definition_id = azurerm_policy_definition.no_untagged_resources.id
+  policy_definition_id = azurerm_policy_definition.no_public_ip.id
 
 }
