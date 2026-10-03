@@ -7,14 +7,13 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name = "tf-remote-state-rg"
+    resource_group_name  = "tf-remote-state-rg"
     storage_account_name = "remotestatestorageslz"
-    container_name = "tfstate"
-    key = "slz-prod.tfstate"
-    use_azuread_auth = true
+    container_name       = "tfstate"
+    key                  = "slz-prod.tfstate"
+    use_azuread_auth     = true
   }
 }
-
 
 provider "azurerm" {
   features {}
