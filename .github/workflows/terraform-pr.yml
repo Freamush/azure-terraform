@@ -48,7 +48,7 @@ jobs:
         uses: terraform-linters/setup-tflint@v4
 
       - name: tflint
-        continue-on-error: true 
+        continue-on-error: false
         run: tflint -f compact
 
       - name: checkov
@@ -57,7 +57,7 @@ jobs:
           directory: .
           framework: terraform
           quiet: true
-          soft_fail: true
+          soft_fail: false
 
       - name: Plan
         id: plan
