@@ -48,7 +48,10 @@ jobs:
         uses: terraform-linters/setup-tflint@v4
 
       - name: tflint
+
         continue-on-error: false 
+
+
         run: tflint -f compact
 
       - name: checkov
