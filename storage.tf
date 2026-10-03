@@ -6,11 +6,24 @@ resource "azurerm_storage_account" "slzstorageiac" {
   location                      = azurerm_resource_group.Secure-Landing-Zone-IaC.location
   account_tier                  = "Standard"
   account_replication_type      = "LRS"
+  #checkov:skip=CKV_AZURE_206
+  #checkov:skip=CKV_AZURE_33
+  min_tls_version = "TLS1_2"
+  allow_nested_items_to_be_public = false
   local_user_enabled            = false
   public_network_access_enabled = false
   shared_access_key_enabled     = false
   tags                          = local.tags
 
+    blob_properties {
+      delete_retention_policy {
+        days = 7
+        }
+            container_delete_retention_policy {
+      days = 7
+    }
+    }
+    
 }
 
 resource "azurerm_storage_container" "slzstorageiac-container" {

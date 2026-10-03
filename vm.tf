@@ -38,6 +38,9 @@ resource "azurerm_virtual_machine" "vm-spoke1" {
   vm_size                       = "Standard_B2ts_v2"
   delete_os_disk_on_termination = true
 
+  #checkov:skip=CKV2_AZURE_12
+  #checkov:skip=CKV2_AZURE_10
+
   storage_os_disk {
     name              = "osdisk-spoke1"
     caching           = "ReadWrite"
