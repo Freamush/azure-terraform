@@ -5,7 +5,7 @@ resource "azurerm_firewall" "az-firewall" {
   sku_name            = "AZFW_VNet"
   sku_tier            = "Standard"
   firewall_policy_id  = azurerm_firewall_policy.fw-policy.id
-  threat_intel_mode = "Deny"
+  threat_intel_mode   = "Deny"
   #checkov:skip=CKV_AZURE_220:Premium-only feature
   ip_configuration {
     name                 = "ipconfig"
@@ -14,7 +14,7 @@ resource "azurerm_firewall" "az-firewall" {
   }
   tags = local.tags
 
-  
+
 }
 
 resource "azurerm_subnet" "fw-subnet" {
@@ -35,12 +35,12 @@ resource "azurerm_public_ip" "fw-public-ip" {
 }
 
 resource "azurerm_firewall_policy" "fw-policy" {
-  name                = "fw-policy"
-  resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
-  location            = azurerm_resource_group.Secure-Landing-Zone-IaC.location
-  sku                 = "Standard"
+  name                     = "fw-policy"
+  resource_group_name      = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  location                 = azurerm_resource_group.Secure-Landing-Zone-IaC.location
+  sku                      = "Standard"
   threat_intelligence_mode = "Deny"
-  tags = local.tags
+  tags                     = local.tags
 }
 
 resource "azurerm_firewall_policy_rule_collection_group" "fw-rcg" {
