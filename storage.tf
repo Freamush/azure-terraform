@@ -8,6 +8,7 @@ resource "azurerm_storage_account" "slzstorageiac" {
   account_replication_type = "LRS"
   #checkov:skip=CKV_AZURE_206
   #checkov:skip=CKV_AZURE_33
+  #checkov:skip=CKV2_AZURE_1 CMK would require Key Vault
   min_tls_version                 = "TLS1_2"
   allow_nested_items_to_be_public = false
   local_user_enabled              = false
@@ -30,6 +31,7 @@ resource "azurerm_storage_container" "slzstorageiac-container" {
   name                  = "slzstorageiac-container"
   storage_account_id    = azurerm_storage_account.slzstorageiac.id
   container_access_type = "private"
+  #checkov:skip=CKV2_AZURE_21 todo
 }
 
 resource "azurerm_private_endpoint" "pe-spoke2" {

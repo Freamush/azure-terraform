@@ -6,7 +6,8 @@ resource "azurerm_firewall" "az-firewall" {
   sku_tier            = "Standard"
   firewall_policy_id  = azurerm_firewall_policy.fw-policy.id
   threat_intel_mode   = "Deny"
-  #checkov:skip=CKV_AZURE_220:Premium-only feature
+  #checkov:skip=CKV_AZURE_220:Premium-only 
+  #checkov:skip=CKV_AZURE_220:IDPS Premium-only
   ip_configuration {
     name                 = "ipconfig"
     subnet_id            = azurerm_subnet.fw-subnet.id
