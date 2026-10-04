@@ -28,6 +28,10 @@ GitHub Actions (OIDC, no stored credentials) and monitored with Azure Monitor.
 - Authentication: GitHub OIDC -> Entra app registration with a federated credential
 - State: remote backend in a separate resource group stored in Blob container
 
+<img width="707" height="819" alt="image" src="https://github.com/user-attachments/assets/c9e65aa6-8e39-4f76-8618-a3ff7cf36442" />
+
+<img width="630" height="674" alt="image" src="https://github.com/user-attachments/assets/51816721-87e5-429c-886a-dd284a3178c8" />
+
 ## Monitoring
 - **Log Analytics workspace**: 30-day retention, 1 GB daily cap to control cost
 - **Diagnostic settings**: Firewall (network rule, application rule, DNS, threat intel)
@@ -40,9 +44,8 @@ GitHub Actions (OIDC, no stored credentials) and monitored with Azure Monitor.
 
 ## Example of Blob creation using identity bassed access to the Storage in Private Endpoint.
 
-<img width="1280" height="416" alt="image" src="https://github.com/user-attachments/assets/227ab486-dc7c-4fa6-b3d0-bacba4700328" />
+<img width="1280" height="416" alt="image" src="https://github.com/user-attachments/assets/227ab486-dc7c-4fa6-b3d0-bacba4700328" /> <img width="1280" height="466" alt="image" src="https://github.com/user-attachments/assets/ad68be6c-9727-4b25-8599-57878dae02a0" />
 
-<img width="1280" height="466" alt="image" src="https://github.com/user-attachments/assets/ad68be6c-9727-4b25-8599-57878dae02a0" />
 
 ## Compliance
 All resources comply with the custom policies defined in this project
