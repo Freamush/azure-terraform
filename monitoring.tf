@@ -31,9 +31,9 @@ resource "azurerm_monitor_diagnostic_setting" "fw-diagnostics" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "storage-diagnostics" {
-  name                           = "storage-diagnostics"
-  target_resource_id             = "${azurerm_storage_account.slzstorageiac.id}/blobServices/default"
-  log_analytics_workspace_id     = azurerm_log_analytics_workspace.log_space.id
+  name                       = "storage-diagnostics"
+  target_resource_id         = "${azurerm_storage_account.slzstorageiac.id}/blobServices/default"
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.log_space.id
 
   enabled_log {
     category = "StorageDelete"
