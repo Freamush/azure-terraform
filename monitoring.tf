@@ -5,6 +5,8 @@ resource "azurerm_log_analytics_workspace" "log_space" {
   sku                 = "PerGB2018"
   retention_in_days   = 30
   daily_quota_gb      = 1
+  tags                = local.tags
+
 }
 
 resource "azurerm_monitor_diagnostic_setting" "fw-diagnostics" {
@@ -44,6 +46,7 @@ resource "azurerm_monitor_diagnostic_setting" "storage-diagnostics" {
   enabled_log {
     category = "StorageWrite"
   }
+
 
 }
 
