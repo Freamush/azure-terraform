@@ -68,7 +68,6 @@ resource "azurerm_monitor_scheduled_query_rules_alert_v2" "alert1" {
   window_duration      = "PT15M"
   criteria {
     query                   = <<-QUERY
-      requests
       AZFWApplicationRule
       | where Action == "Deny"
       | summarize DenyCount = count() by SourceIp
