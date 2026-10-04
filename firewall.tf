@@ -78,7 +78,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "fw-rcg" {
         "security.ubuntu.com",
         "aka.ms",
         "packages.microsoft.com",
-        "azcliprod.blob.core.windows.net",
+        "azurecliprod.blob.core.windows.net",
         "management.azure.com",
         "motd.ubuntu.com",
         "changelogs.ubuntu.com",
