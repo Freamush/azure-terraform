@@ -57,3 +57,30 @@ resource "azurerm_monitor_action_group" "action_group" {
   }
   tags = local.tags
 }
+
+resource "azurerm_monitor_scheduled_query_rules_alert_v2" "alert1" {
+  name                 = "deny_alert"
+  location             = azurerm_resource_group.Secure-Landing-Zone-IaC.location
+  resource_group_name  = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  scopes               = [azurerm_log_analytics_workspace.log_space.id]
+  severity             = 2
+  evaluation_frequency = "PT5M"
+  window_duration      = "PT15M"
+  criteria {
+    query                   = <<-QUERY
+      requests
+      AZFWApplicationRule
+      | where Action == "Deny"
+      | summarize DenyCount = count() by SourceIp
+      | where DenyCount > 3
+      QUERY
+    time_aggregation_method = "Count"
+    threshold               = 0
+    operator                = "GreaterThan"
+  }
+  action {
+    action_groups = [azurerm_monitor_action_group.action_group.id]
+  }
+  tags = local.tags
+
+}
