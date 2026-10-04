@@ -46,3 +46,13 @@ resource "azurerm_monitor_diagnostic_setting" "storage-diagnostics" {
   }
 
 }
+
+resource "azurerm_monitor_action_group" "action_group" {
+  name                = "action_group"
+  resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
+  short_name          = "AG-1"
+  email_receiver {
+    name          = var.username
+    email_address = var.ALERT_EMAIL
+  }
+}
