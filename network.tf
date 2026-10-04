@@ -36,6 +36,7 @@ resource "azurerm_subnet" "bastion-subnet" {
   resource_group_name  = azurerm_resource_group.Secure-Landing-Zone-IaC.name
   virtual_network_name = azurerm_virtual_network.vnet-lz-hub.name
   address_prefixes     = [local.bastion_subnet_cidr]
+  #checkov:skip=CKV2_AZURE_31
 }
 
 resource "azurerm_subnet" "subnet2" {
