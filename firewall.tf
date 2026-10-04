@@ -8,6 +8,7 @@ resource "azurerm_firewall" "az-firewall" {
   threat_intel_mode   = "Deny"
   #checkov:skip=CKV_AZURE_220:Premium-only 
   #checkov:skip=CKV_AZURE_220:IDPS Premium-only
+
   ip_configuration {
     name                 = "ipconfig"
     subnet_id            = azurerm_subnet.fw-subnet.id
@@ -42,6 +43,7 @@ resource "azurerm_firewall_policy" "fw-policy" {
   sku                      = "Standard"
   threat_intelligence_mode = "Deny"
   tags                     = local.tags
+  #checkov:skip=CKV_AZURE_220:IDPS Premium-only
 }
 
 resource "azurerm_firewall_policy_rule_collection_group" "fw-rcg" {
