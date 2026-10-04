@@ -64,8 +64,9 @@ jobs:
 
       - name: Plan
         id: plan
- 
-        run: terraform plan -input=false -no-color -lock=false -out=tfplan
+        env: 
+          TF_VAR_ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        run: "terraform plan -input=false -no-color -lock=false -out=tfplan; "
 
       - name: Plan summary
         if: steps.plan.outcome == 'success'

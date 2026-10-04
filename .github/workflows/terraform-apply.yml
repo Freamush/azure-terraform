@@ -42,6 +42,8 @@ jobs:
         run: terraform validate -no-color
 
       - name: Plan
+        env: 
+          TF_VAR_ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
         run: terraform plan -input=false -no-color -lock-timeout=5m -out=tfplan
 
       - name: Plan summary

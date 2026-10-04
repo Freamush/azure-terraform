@@ -54,3 +54,9 @@ locals {
     owner   = "fream"
   }
 }
+
+variable "ALERT_EMAIL" {
+  description = "action group email"
+  type        = string
+  sensitive   = true
+}
