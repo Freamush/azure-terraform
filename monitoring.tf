@@ -55,4 +55,5 @@ resource "azurerm_monitor_action_group" "action_group" {
     name          = var.username
     email_address = var.ALERT_EMAIL
   }
+  tags = local.tags
 }
