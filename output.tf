@@ -28,6 +28,11 @@ output "bastion_public_ip_address" {
   value       = azurerm_public_ip.bastion-public-ip.ip_address
 }
 
+output "work_space_id" {
+  description = "Workspace log analytics id"
+  value       = azurerm_log_analytics_workspace.log_space.id
+}
+
 output "vm_spoke1_id" {
   description = "The Azure Virtual Machine ID"
   value       = azurerm_virtual_machine.vm-spoke1.id
