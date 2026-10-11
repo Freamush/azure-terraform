@@ -9,6 +9,7 @@ resource "azurerm_log_analytics_workspace" "log_space" {
 
 }
 
+
 resource "azurerm_monitor_diagnostic_setting" "fw-diagnostics" {
   name                           = "firewall-diagnostics"
   target_resource_id             = azurerm_firewall.az-firewall.id

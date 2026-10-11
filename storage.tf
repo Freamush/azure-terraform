@@ -38,7 +38,7 @@ resource "azurerm_private_endpoint" "pe-spoke2" {
   name                = "pe-spoke2"
   location            = azurerm_resource_group.Secure-Landing-Zone-IaC.location
   resource_group_name = azurerm_resource_group.Secure-Landing-Zone-IaC.name
-  subnet_id           = azurerm_subnet.subnet3.id
+  subnet_id           = module.spoke2.subnet.id
 
 
   private_service_connection {
@@ -52,7 +52,5 @@ resource "azurerm_private_endpoint" "pe-spoke2" {
     name                 = "pe-spoke2-dns-zone-group"
     private_dns_zone_ids = [azurerm_private_dns_zone.private-zone.id]
   }
-
-
   tags = local.tags
 }
