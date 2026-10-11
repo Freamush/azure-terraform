@@ -22,7 +22,7 @@ resource "azurerm_network_interface" "nic-spoke1" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet2.id
+    subnet_id                     = module.spoke1.subnet.id
     private_ip_address_allocation = "Static"
     private_ip_address            = var.VM-PRIVATE-IP
   }
