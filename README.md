@@ -1,5 +1,7 @@
 # Secure Landing Zone on Azure (Terraform)
 
+This landing zone is a part of a major project https://github.com/Freamush/onze-infrastructure 
+
 Hub-and-spoke landing zone in Azure, built with Terraform, deployed through
 GitHub Actions (OIDC, no stored credentials) and monitored with Azure Monitor.
 
